@@ -87,7 +87,7 @@
             position: relative;
             overflow: hidden;
             width: 90%; /* Increased width */
-            max-width: 500px; /* Added max-width for larger screens */
+            max-width: 800px; /* Increased max-width for login container */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
         }
         /* Highlighted School Name */
@@ -272,7 +272,7 @@
             padding: 30px; /* Increased padding */
             border-radius: 8px;
             width: 90%; /* Responsive width */
-            max-width: 600px; /* Max width for larger screens */
+            max-width: 900px; /* Increased max-width for modals */
             max-height: 90vh; /* Max height to fit within viewport */
             overflow-y: auto;
             position: relative;
