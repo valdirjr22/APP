@@ -80,21 +80,22 @@
         /* --- Improved Login Screen Styles --- */
         #loginContainer {
             text-align: center;
-            padding: 40px 35px; /* More padding */
+            padding: 50px 45px; /* Increased padding for larger feel */
             border: none; /* Remove border */
             border-radius: 10px; /* More rounded corners */
             background-color: #ffffff; /* White background */
             position: relative;
             overflow: hidden;
-            width: 400px; /* Slightly larger container */
+            width: 90%; /* Increased width */
+            max-width: 500px; /* Added max-width for larger screens */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
         }
         /* Highlighted School Name */
         #loginContainer .senac-title {
-            font-size: 3em; /* Larger size */
+            font-size: 3.5em; /* Larger size */
             font-weight: bold;
             color: #8B4513; /* Brown accent color */
-            margin-bottom: 30px; /* More space below */
+            margin-bottom: 40px; /* More space below */
             line-height: 1.1;
         }
 
@@ -107,7 +108,7 @@
             opacity: 0.05; /* More subtle */
             z-index: 0;
             pointer-events: none;
-            width: 60%; /* Relative width */
+            width: 70%; /* Relative width */
         }
         .login-watermark img {
              max-width: 100%;
@@ -117,13 +118,13 @@
         /* Improved Input Fields */
         #loginContainer input[type="text"],
         #loginContainer input[type="password"] {
-            padding: 15px; /* More internal padding */
-            margin: 15px 0; /* More vertical space */
+            padding: 18px; /* More internal padding */
+            margin: 18px 0; /* More vertical space */
             width: 100%;
             border-radius: 5px;
             border: 1px solid yellow; /* Subtle border */
             box-sizing: border-box;
-            font-size: 16px;
+            font-size: 18px; /* Larger font size */
             transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transitions */
         }
         #loginContainer input[type="text"]:focus,
@@ -137,9 +138,9 @@
          #loginContainer #loginButton {
              width: 100% !important; /* Full width */
              display: block !important;
-             padding: 15px 30px; /* Generous padding */
-             margin-top: 25px; /* Space above */
-             font-size: 18px; /* Font size */
+             padding: 20px 35px; /* Generous padding */
+             margin-top: 30px; /* Space above */
+             font-size: 20px; /* Larger Font size */
              font-weight: bold;
              background-color: yellow; /* Accent color */
              border: none;
@@ -164,9 +165,9 @@
         }
 
         #sidebar {
-            width: 230px;
+            width: 250px; /* Slightly wider sidebar */
             background-color: white; /* Sidebar background color */
-            padding: 15px;
+            padding: 20px; /* Increased padding */
             display: flex;
             flex-direction: column;
             border-right: 1px solid yellow; /* Sidebar border */
@@ -175,15 +176,15 @@
             flex-shrink: 0;
         }
         #sidebar h2, #sidebar h3 {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            font-size: 1.1em; /* Adjusted size */
+            margin-top: 15px; /* More margin */
+            margin-bottom: 15px;
+            font-size: 1.2em; /* Adjusted size */
             color: #A52A2A; /* Darker text color */
         }
         #sidebar .button {
-            margin-bottom: 10px;
+            margin-bottom: 12px; /* Increased margin */
              text-align: left; /* Align button text */
-             padding: 10px 12px;
+             padding: 12px 15px; /* Increased padding */
              width: 100%; /* Full width */
              box-sizing: border-box;
         }
@@ -198,21 +199,18 @@
 
         #mainContentArea {
             flex-grow: 1;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-top: 80px;
-            padding-bottom: 25px;
+            padding: 30px; /* Increased padding for all sides */
             overflow-y: auto;
-            height: calc(100vh - 80px - 40px);
+            height: calc(100vh - 40px); /* Adjust height for footer */
             box-sizing: border-box;
             position: relative;
         }
         /* App Text - Top Right Corner */
         #appHeaderText {
             position: fixed;
-            top: 15px;
-            right: 25px;
-            font-size: 2em; /* Large size */
+            top: 20px; /* Adjusted position */
+            right: 30px; /* Adjusted position */
+            font-size: 2.2em; /* Large size */
             font-weight: bold;
             color: yellow; /* Accent color */
             z-index: 1001;
@@ -221,19 +219,19 @@
 
         #mainContentArea h1 {
             margin-top: 0;
-            margin-bottom: 25px; /* More space below main title */
+            margin-bottom: 30px; /* More space below main title */
         }
 
         /* General adjustments for inputs/selects within the App */
-        input[type="text"], input[type="password"], select {
-            padding: 10px; /* Increase padding */
-            margin: 5px 3px; /* Adjust margin */
+        input[type="text"], input[type="password"], select, textarea { /* Added textarea */
+            padding: 12px; /* Increase padding */
+            margin: 8px 5px; /* Adjust margin */
             width: auto; /* Allow initial auto adjustment */
-            min-width: 180px; /* Minimum width */
+            min-width: 200px; /* Minimum width */
             border-radius: 5px;
             border: 1px solid yellow; /* Border color */
             box-sizing: border-box;
-            font-size: 15px;
+            font-size: 16px; /* Increased font size */
         }
          input[type="text"]:disabled, select:disabled {
              background-color: white; /* Disabled background */
@@ -250,50 +248,60 @@
         }
         /* Adjustment for observation input, can be wider */
         #addDisciplineSection input[type="text"]#observationInput {
-            min-width: 250px; /* Allow a bit more space for observation */
+            min-width: 300px; /* Allow a bit more space for observation */
         }
          /* Style for the non-editable 'Média' display */
         #mediaDisplay {
             margin-top: 10px;
             font-weight: bold;
             color: #A52A2A;
-            padding: 8px;
+            padding: 10px;
             border: 1px solid yellow;
             border-radius: 5px;
             background-color: white;
             display: inline-block; /* Aligns well with other form elements */
-            min-width: 100px;
+            min-width: 120px;
             text-align: center;
         }
 
 
         /* Modal styles */
         .modal { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; display: flex; justify-content: center; align-items: center; }
-        .modal-content { background-color: white; padding: 20px; border-radius: 8px; width: 500px; max-width: 90%; max-height: 80vh; overflow-y: auto; position: relative; z-index: 1002; }
+        .modal-content {
+            background-color: white;
+            padding: 30px; /* Increased padding */
+            border-radius: 8px;
+            width: 90%; /* Responsive width */
+            max-width: 600px; /* Max width for larger screens */
+            max-height: 90vh; /* Max height to fit within viewport */
+            overflow-y: auto;
+            position: relative;
+            z-index: 1002;
+        }
         .modal-content h2 { margin-top: 0; }
-        .modal-content label{ display: block; margin-top: 10px; font-weight: bold; }
-        .modal-content input[type="text"], .modal-content input[type="password"] { width: 100%; } /* Inputs in modal 100% */
-        .close-button { position: absolute; top: 10px; right: 15px; font-size: 24px; font-weight: bold; cursor: pointer; }
-        #professorDisciplinesCheckboxes div, #professorClassesCheckboxes div, #editProfessorDisciplinesCheckboxes div, #editProfessorClassesCheckboxes div { margin-bottom: 5px; } /* Added edit IDs */
-        #professorDisciplinesCheckboxes label, #professorClassesCheckboxes label, #editProfessorDisciplinesCheckboxes label, #editProfessorClassesCheckboxes label { margin-left: 5px; font-weight: normal; display: inline-block; margin-right: 10px; } /* Added edit IDs */
-        #professorDisciplinesCheckboxes input[type="checkbox"], #professorClassesCheckboxes input[type="checkbox"], #editProfessorDisciplinesCheckboxes input[type="checkbox"], #editProfessorClassesCheckboxes input[type="checkbox"] { vertical-align: middle;} /* Added edit IDs */
+        .modal-content label{ display: block; margin-top: 15px; font-weight: bold; } /* Increased margin */
+        .modal-content input[type="text"], .modal-content input[type="password"], .modal-content select { width: 100%; padding: 12px; font-size: 1em; } /* Inputs in modal 100% and larger */
+        .close-button { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; } /* Larger close button */
+        #professorDisciplinesCheckboxes div, #professorClassesCheckboxes div, #editProfessorDisciplinesCheckboxes div, #editProfessorClassesCheckboxes div { margin-bottom: 8px; } /* Increased margin */
+        #professorDisciplinesCheckboxes label, #professorClassesCheckboxes label, #editProfessorDisciplinesCheckboxes label, #editProfessorClassesCheckboxes label { margin-left: 8px; font-weight: normal; display: inline-block; margin-right: 15px; font-size: 1.05em; } /* Increased font size */
+        #professorDisciplinesCheckboxes input[type="checkbox"], #professorClassesCheckboxes input[type="checkbox"], #editProfessorDisciplinesCheckboxes input[type="checkbox"], #editProfessorClassesCheckboxes input[type="checkbox"] { vertical-align: middle; transform: scale(1.1); } /* Slightly larger checkboxes */
 
          /* Specific styles for discipline/class assignment checkboxes */
         .discipline-assignment {
-            margin-bottom: 15px;
-            padding: 10px;
+            margin-bottom: 20px; /* More space */
+            padding: 15px; /* More padding */
             border: 1px solid yellow; /* Border for assignment box */
-            border-radius: 5px;
+            border-radius: 8px; /* More rounded */
             background-color: white; /* Background for assignment box */
         }
         .discipline-assignment h4 {
             margin-top: 0;
-            margin-bottom: 8px;
+            margin-bottom: 10px; /* More space */
             color: #A52A2A; /* Text color */
-            font-size: 1.1em;
+            font-size: 1.2em; /* Larger font */
         }
         .discipline-assignment .class-checkboxes label {
-            margin-right: 15px;
+            margin-right: 20px; /* More spacing */
              font-weight: normal;
         }
 
@@ -302,25 +310,27 @@
         .editable-cell {
             cursor: pointer;
             border: 1px dashed yellow; /* Dashed border to indicate editable */
+            padding: 5px; /* Add some padding */
         }
          .editable-cell:hover {
              background-color: white; /* Highlight on hover */
          }
+         .editable-cell.editing {
+             background-color: #fff; /* White background when editing */
+         }
          .editable-cell input[type="text"], .editable-cell select {
-             width: 100%;
-             padding: 0;
+             width: calc(100% - 2px); /* Account for borders */
+             padding: 4px;
              margin: 0;
-             border: none;
-             background: none;
+             border: 1px solid #ccc; /* Visible border when editing */
+             background: #f9f9f9; /* Light background when editing */
              text-align: center;
              font-size: inherit;
              font-family: inherit;
              box-sizing: border-box;
              outline: none; /* Remove outline when editing */
          }
-         .editable-cell.editing {
-             background-color: #fff; /* White background when editing */
-         }
+
 
         /* Styles for User Management Table */
         #manageUsersSection table {
@@ -329,14 +339,14 @@
         }
          #manageUsersSection table th, #manageUsersSection table td {
              text-align: left;
-              padding: 10px; /* More padding */
+              padding: 12px; /* More padding */
          }
           #manageUsersSection table td:nth-last-child(3) { /* Disciplines Assigned Column (third to last before Actions) */
-             font-size: 0.9em;
+             font-size: 0.95em;
              overflow-wrap: break-word; /* Break text if too long */
           }
            #manageUsersSection table td:nth-last-child(2) { /* Classes Assigned Column (second to last before Actions) */
-             font-size: 0.9em;
+             font-size: 0.95em;
              overflow-wrap: break-word; /* Break text if too long */
           }
            #manageUsersSection table th:nth-last-child(3), #manageUsersSection table td:nth-last-child(3) {
@@ -347,7 +357,7 @@
            }
           #manageUsersSection table td:nth-last-child(1) { /* Password Column */
              font-family: 'Courier New', Courier, monospace; /* Monospaced font for passwords */
-             font-size: 0.9em;
+             font-size: 0.95em;
              overflow-wrap: break-word; /* Break password if too long */
           }
           #manageUsersSection table th:nth-last-child(1), #manageUsersSection table td:nth-last-child(1) { /* Center Password title */
@@ -355,41 +365,48 @@
           }
            #manageUsersSection table td:last-child { /* Actions Column */
                 text-align: center;
-                width: 120px; /* Space for buttons */
+                width: 140px; /* More space for buttons */
            }
            #manageUsersSection table .button {
                 width: auto;
                 display: inline-block;
-                margin: 2px;
+                margin: 4px; /* More margin */
            }
             #manageUsersSection p { /* Message when no users */
                  text-align: center;
                  font-style: italic;
                  color: #A52A2A; /* Text color */
+                 font-size: 1.1em;
             }
             #manageUsersSection .security-warning {
                 color: #dc3545; /* Warning color */
                 text-align: center;
-                margin-top: 20px;
+                margin-top: 25px; /* More margin */
                 font-weight: bold;
+                font-size: 1.1em;
             }
 
             /* Styles for Professor Section */
              #professorSection h1 {
-                 margin-bottom: 15px;
+                 margin-bottom: 20px; /* More margin */
              }
              #professorSection p {
-                 margin-bottom: 15px;
+                 margin-bottom: 20px;
+                 font-size: 1.1em;
              }
               #professorSection label {
                   font-weight: bold;
-                  margin-right: 5px;
+                  margin-right: 8px; /* More margin */
+                  font-size: 1.1em;
               }
               #professorSection select {
-                 margin-right: 15px;
+                 margin-right: 20px; /* More margin */
+                 padding: 10px; /* Larger padding */
+                 font-size: 1.05em;
               }
               #professorSection table.professor-table th, #professorSection table.professor-table td {
                    text-align: center; /* Center cells in professor table */
+                   padding: 10px; /* Larger padding */
                }
                #professorSection table.professor-table td:first-child {
                   text-align: left; /* Student name aligned left */
@@ -402,12 +419,12 @@
             /* Fixed footer in the application */
             #appFooter {
                 width: 100%;
-                height: 40px; /* Footer height */
+                height: 50px; /* Larger Footer height */
                 background-color: #dc3545; /* Primary color for footer */
                 color: white;
                 text-align: center;
-                line-height: 40px; /* Vertically center text */
-                font-size: 0.9em;
+                line-height: 50px; /* Vertically center text */
+                font-size: 1em; /* Slightly larger font */
                 position: fixed; /* Fix to bottom */
                 bottom: 0;
                 left: 0;
@@ -416,21 +433,23 @@
 
             /* Styles for Print Options in Student Bulletin Section */
             #studentPrintOptions {
-                margin-bottom: 20px;
-                padding: 15px;
+                margin-bottom: 25px; /* More margin */
+                padding: 20px; /* More padding */
                 border: 1px solid yellow; /* Border color */
-                border-radius: 5px;
+                border-radius: 8px; /* More rounded */
                 background-color: white; /* Background color */
             }
             #studentPrintOptions label {
                 display: inline-block;
-                margin-right: 15px;
+                margin-right: 20px; /* More margin */
                 font-weight: normal;
+                font-size: 1.05em;
             }
             #studentPrintOptions input[type="checkbox"],
             #studentPrintOptions input[type="radio"] {
-                margin-right: 5px;
+                margin-right: 8px; /* More margin */
                 vertical-align: middle;
+                transform: scale(1.1); /* Slightly larger */
             }
 
 
