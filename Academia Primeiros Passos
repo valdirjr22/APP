@@ -802,6 +802,9 @@
             <option value="8A">8A</option>
             <option value="8B">8B</option>
             <option value="8C">8C</option>
+            <option value="9A">9A</option> <!-- NEW CLASS -->
+            <option value="9B">9B</option> <!-- NEW CLASS -->
+            <option value="9C">9C</option> <!-- NEW CLASS -->
         </select>
     </div>
     <div>
@@ -1185,6 +1188,9 @@
         '8A': { unit: 'Manhã', course: 'Fundamental 2' },
         '8B': { unit: 'Manhã', course: 'Fundamental 2' },
         '8C': { unit: 'Manhã', course: 'Fundamental 2' },
+        '9A': { unit: 'Manhã', course: 'Fundamental 3' }, // NEW CLASS
+        '9B': { unit: 'Manhã', course: 'Fundamental 3' }, // NEW CLASS
+        '9C': { unit: 'Manhã', course: 'Fundamental 3' }, // NEW CLASS
         // Existing classes (Médio Técnico)
         '1A_MT': { unit: 'Manhã', course: 'Médio Técnico Desenvolvimento de Sistemas' },
         '1B_MT': { unit: 'Manhã', course: 'Médio Técnico Desenvolvimento de Jogos' },
@@ -1949,7 +1955,7 @@
         // Generate a simple unique ID (timestamp + random number)
         const newStudentId = 's' + Date.now() + Math.floor(Math.random() * 1000);
 
-        // Use studentShift for 'unit' field now
+        // Use studentShift for 'unit' field now (This means 'unit' will store "Manhã" or "Tarde" for student's shift)
         const newStudent = { id: newStudentId, matricula: matricula, name: name, course: classInfo.course, class: className, unit: studentShift, disciplines: [], professorNotes: [] };
         students.push(newStudent);
         studentNameInput.value = '';
@@ -2611,6 +2617,7 @@
         "Infantil 1", "Infantil 2", "Infantil 3",
         "1A", "1B", "1C", "2A", "2B", "2C", "3A", "3B", "3C", "4A", "4B", "4C", "5A", "5B", "5C",
         "6A", "6B", "6C", "7A", "7B", "7C", "8A", "8B", "8C",
+        "9A", "9B", "9C", // NEW CLASSES
         "1A_MT", "1B_MT", "1C_MT", "2A_MT", "2B_MT", "3A_MT" // Existing Médio Técnico classes
     ].sort(); // Sort alphabetically for display
 
