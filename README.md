@@ -199,7 +199,7 @@
 
         #mainContentArea {
             flex-grow: 1;
-            padding: 30px; /* Increased padding for all sides */
+            padding: 30px 15px; /* Adjusted padding: 30px top/bottom, 15px left/right */
             overflow-y: auto;
             height: calc(100vh - 40px); /* Adjust height for footer */
             box-sizing: border-box;
@@ -272,7 +272,7 @@
             padding: 30px; /* Increased padding */
             border-radius: 8px;
             width: 90%; /* Responsive width */
-            max-width: 900px; /* Increased max-width for modals */
+            max-width: 1100px; /* Increased max-width for modals */
             max-height: 90vh; /* Max height to fit within viewport */
             overflow-y: auto;
             position: relative;
