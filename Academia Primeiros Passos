@@ -7,7 +7,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
             margin: 0;
-            background-color: white; /* Light background color */
+            background-color: #D2B48C; /* Light brown background color (Tan) */
             color: #A52A2A; /* Primary color */
             min-height: 100vh;
             padding-bottom: 40px; /* Add bottom padding for fixed footer */
@@ -43,6 +43,10 @@
             background-color: #A52A2A; /* Primary color for table headers */
             color: white;
         }
+        tr:hover:not(.student-group-header):not(.no-hover) { /* Added hover for table rows */
+            background-color: #f9f9f9; /* Lighter background on hover */
+            cursor: pointer;
+        }
         .button {
             background-color: yellow; /* Accent color for buttons */
             color: #8B4513; /* Brown text for buttons */
@@ -53,14 +57,22 @@
             border-radius: 5px;
             display: block;
             width: calc(100% - 10px);
-            transition: background-color 0.3s ease; /* Smooth transition */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for all effects */
         }
         .button:hover {
             background-color: #f0c000; /* Lighter yellow on hover */
+            transform: translateY(-2px); /* Subtle lift effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Add shadow on hover */
+        }
+        .button:active {
+            transform: translateY(0); /* Return to original position on click */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Smaller shadow on active */
         }
          .button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
+            transform: none; /* No transform when disabled */
+            box-shadow: none; /* No shadow when disabled */
         }
          .button.delete-button {
              background-color: #dc3545; /* Red for delete button */
@@ -129,8 +141,8 @@
         }
         #loginContainer input[type="text"]:focus,
         #loginContainer input[type="password"]:focus {
-            border-color: yellow; /* Accent color on focus */
-            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2); /* Outer shadow on focus (original orange, keeping for effect) */
+            border-color: #A52A2A; /* Primary color on focus */
+            box-shadow: 0 0 0 3px rgba(165, 42, 42, 0.2); /* Outer shadow on focus using primary color */
             outline: none; /* Remove default outline */
         }
 
@@ -147,11 +159,16 @@
              border-radius: 5px;
              color: #8B4513; /* Brown text */
              cursor: pointer;
-             transition: background-color 0.3s ease, box-shadow 0.3s ease;
+             transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease; /* Added transform transition */
          }
          #loginContainer #loginButton:hover {
              background-color: #f0c000; /* Lighter yellow on hover */
              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+             transform: translateY(-2px); /* Lift effect on hover */
+         }
+         #loginContainer #loginButton:active {
+             transform: translateY(0); /* Pressed effect on click */
+             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
          }
          /* --- End Login Styles --- */
 
@@ -232,7 +249,13 @@
             border: 1px solid yellow; /* Border color */
             box-sizing: border-box;
             font-size: 16px; /* Increased font size */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transitions */
         }
+         input[type="text"]:focus, select:focus, textarea:focus { /* Added textarea focus */
+            border-color: #A52A2A; /* Primary color on focus */
+            box-shadow: 0 0 0 3px rgba(165, 42, 42, 0.2); /* Outer shadow on focus */
+            outline: none; /* Remove default outline */
+         }
          input[type="text"]:disabled, select:disabled {
              background-color: white; /* Disabled background */
              cursor: not-allowed;
@@ -266,7 +289,19 @@
 
 
         /* Modal styles */
-        .modal { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; display: flex; justify-content: center; align-items: center; }
+        .modal {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out; /* Fade in animation for modal */
+        }
         .modal-content {
             background-color: white;
             padding: 30px; /* Increased padding */
@@ -277,11 +312,17 @@
             overflow-y: auto;
             position: relative;
             z-index: 1002;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Stronger shadow for modals */
+            animation: slideInFromTop 0.3s ease-out; /* Slide in animation for modal content */
         }
         .modal-content h2 { margin-top: 0; }
         .modal-content label{ display: block; margin-top: 15px; font-weight: bold; } /* Increased margin */
         .modal-content input[type="text"], .modal-content input[type="password"], .modal-content select { width: 100%; padding: 12px; font-size: 1em; } /* Inputs in modal 100% and larger */
-        .close-button { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; } /* Larger close button */
+        .close-button { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; color: #A52A2A; transition: color 0.2s ease, transform 0.2s ease; } /* Larger close button */
+        .close-button:hover {
+            color: #dc3545; /* Red on hover */
+            transform: rotate(90deg); /* Spin effect */
+        }
         #professorDisciplinesCheckboxes div, #professorClassesCheckboxes div, #editProfessorDisciplinesCheckboxes div, #editProfessorClassesCheckboxes div { margin-bottom: 8px; } /* Increased margin */
         #professorDisciplinesCheckboxes label, #professorClassesCheckboxes label, #editProfessorDisciplinesCheckboxes label, #editProfessorClassesCheckboxes label { margin-left: 8px; font-weight: normal; display: inline-block; margin-right: 15px; font-size: 1.05em; } /* Increased font size */
         #professorDisciplinesCheckboxes input[type="checkbox"], #professorClassesCheckboxes input[type="checkbox"], #editProfessorDisciplinesCheckboxes input[type="checkbox"], #editProfessorClassesCheckboxes input[type="checkbox"] { vertical-align: middle; transform: scale(1.1); } /* Slightly larger checkboxes */
@@ -293,6 +334,10 @@
             border: 1px solid yellow; /* Border for assignment box */
             border-radius: 8px; /* More rounded */
             background-color: white; /* Background for assignment box */
+            transition: background-color 0.3s ease;
+        }
+        .discipline-assignment:hover {
+            background-color: #fffacd; /* Light yellow on hover */
         }
         .discipline-assignment h4 {
             margin-top: 0;
@@ -311,9 +356,10 @@
             cursor: pointer;
             border: 1px dashed yellow; /* Dashed border to indicate editable */
             padding: 5px; /* Add some padding */
+            transition: background-color 0.2s ease; /* Smooth transition for hover */
         }
          .editable-cell:hover {
-             background-color: white; /* Highlight on hover */
+             background-color: #fffacd; /* Highlight on hover (light yellow) */
          }
          .editable-cell.editing {
              background-color: #fff; /* White background when editing */
@@ -329,6 +375,11 @@
              font-family: inherit;
              box-sizing: border-box;
              outline: none; /* Remove outline when editing */
+             transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transitions */
+         }
+         .editable-cell input[type="text"]:focus, .editable-cell select:focus {
+             border-color: #A52A2A; /* Primary color on focus */
+             box-shadow: 0 0 0 2px rgba(165, 42, 42, 0.2); /* Smaller shadow for inline edits */
          }
 
 
@@ -722,6 +773,15 @@
             font-style: italic;
             color: #A52A2A; /* Text color */
         }
+        /* Keyframe animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInFromTop {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 </style>
 </head>
 <body>
@@ -795,35 +855,74 @@
         <label for="class">Turma:</label>
         <select id="class">
             <option value="">Selecione a Turma</option>
-            <option value="Infantil 1">Infantil 1</option>
-            <option value="Infantil 2">Infantil 2</option>
-            <option value="Infantil 3">Infantil 3</option>
-            <option value="1A">1A</option> <option value="1B">1B</option>
-            <option value="1C">1C</option>
-            <option value="2A">2A</option>
-            <option value="2B">2B</option>
-            <option value="2C">2C</option>
-            <option value="3A">3A</option>
-            <option value="3B">3B</option>
-            <option value="3C">3C</option>
-            <option value="4A">4A</option>
-            <option value="4B">4B</option>
-            <option value="4C">4C</option>
-            <option value="5A">5A</option>
-            <option value="5B">5B</option>
-            <option value="5C">5C</option>
-            <option value="6A">6A</option>
-            <option value="6B">6B</option>
-            <option value="6C">6C</option>
-            <option value="7A">7A</option>
-            <option value="7B">7B</option>
-            <option value="7C">7C</option>
-            <option value="8A">8A</option>
-            <option value="8B">8B</option>
-            <option value="8C">8C</option>
-            <option value="9A">9A</option> <!-- NEW CLASS -->
-            <option value="9B">9B</option> <!-- NEW CLASS -->
-            <option value="9C">9C</option> <!-- NEW CLASS -->
+            <optgroup label="Educação Infantil">
+                <option value="ED. Infantil 1 Turma A">ED. Infantil 1 Turma A</option>
+                <option value="ED. Infantil 1 Turma B">ED. Infantil 1 Turma B</option>
+                <option value="ED. Infantil 1 Turma C">ED. Infantil 1 Turma C</option>
+                <option value="ED. Infantil 1 Turma D">ED. Infantil 1 Turma D</option>
+                <option value="ED. Infantil 2 Turma A">ED. Infantil 2 Turma A</option>
+                <option value="ED. Infantil 2 Turma B">ED. Infantil 2 Turma B</option>
+                <option value="ED. Infantil 2 Turma C">ED. Infantil 2 Turma C</option>
+                <option value="ED. Infantil 2 Turma D">ED. Infantil 2 Turma D</option>
+                <option value="ED. Infantil 3 Turma A">ED. Infantil 3 Turma A</option>
+                <option value="ED. Infantil 3 Turma B">ED. Infantil 3 Turma B</option>
+                <option value="ED. Infantil 3 Turma C">ED. Infantil 3 Turma C</option>
+                <option value="ED. Infantil 3 Turma D">ED. Infantil 3 Turma D</option>
+            </optgroup>
+            <optgroup label="Fundamental 1">
+                <option value="1 ANO A Fundamental 1">1 ANO A Fundamental 1</option>
+                <option value="1 ANO B Fundamental 1">1 ANO B Fundamental 1</option>
+                <option value="1 ANO C Fundamental 1">1 ANO C Fundamental 1</option>
+                <option value="1 ANO D Fundamental 1">1 ANO D Fundamental 1</option>
+                <option value="2 ANO A Fundamental 1">2 ANO A Fundamental 1</option>
+                <option value="2 ANO B Fundamental 1">2 ANO B Fundamental 1</option>
+                <option value="2 ANO C Fundamental 1">2 ANO C Fundamental 1</option>
+                <option value="2 ANO D Fundamental 1">2 ANO D Fundamental 1</option>
+                <option value="3 ANO A Fundamental 1">3 ANO A Fundamental 1</option>
+                <option value="3 ANO B Fundamental 1">3 ANO B Fundamental 1</option>
+                <option value="3 ANO C Fundamental 1">3 ANO C Fundamental 1</option>
+                <option value="3 ANO D Fundamental 1">3 ANO D Fundamental 1</option>
+                <option value="4 ANO A Fundamental 1">4 ANO A Fundamental 1</option>
+                <option value="4 ANO B Fundamental 1">4 ANO B Fundamental 1</option>
+                <option value="4 ANO C Fundamental 1">4 ANO C Fundamental 1</option>
+                <option value="4 ANO D Fundamental 1">4 ANO D Fundamental 1</option>
+                <option value="5 ANO A Fundamental 1">5 ANO A Fundamental 1</option>
+                <option value="5 ANO B Fundamental 1">5 ANO B Fundamental 1</option>
+                <option value="5 ANO C Fundamental 1">5 ANO C Fundamental 1</option>
+                <option value="5 ANO D Fundamental 1">5 ANO D Fundamental 1</option>
+            </optgroup>
+            <optgroup label="Fundamental 2">
+                <option value="6 ANO A Fundamental 2">6 ANO A Fundamental 2</option>
+                <option value="6 ANO B Fundamental 2">6 ANO B Fundamental 2</option>
+                <option value="6 ANO C Fundamental 2">6 ANO C Fundamental 2</option>
+                <option value="6 ANO D Fundamental 2">6 ANO D Fundamental 2</option>
+                <option value="7 ANO A Fundamental 2">7 ANO A Fundamental 2</option>
+                <option value="7 ANO B Fundamental 2">7 ANO B Fundamental 2</option>
+                <option value="7 ANO C Fundamental 2">7 ANO C Fundamental 2</option>
+                <option value="7 ANO D Fundamental 2">7 ANO D Fundamental 2</option>
+                <option value="8 ANO A Fundamental 2">8 ANO A Fundamental 2</option>
+                <option value="8 ANO B Fundamental 2">8 ANO B Fundamental 2</option>
+                <option value="8 ANO C Fundamental 2">8 ANO C Fundamental 2</option>
+                <option value="8 ANO D Fundamental 2">8 ANO D Fundamental 2</option>
+                <option value="9 ANO A Fundamental 2">9 ANO A Fundamental 2</option>
+                <option value="9 ANO B Fundamental 2">9 ANO B Fundamental 2</option>
+                <option value="9 ANO C Fundamental 2">9 ANO C Fundamental 2</option>
+                <option value="9 ANO D Fundamental 2">9 ANO D Fundamental 2</option>
+            </optgroup>
+            <optgroup label="Ensino Médio">
+                <option value="1 ANO A Ensino Médio">1 ANO A Ensino Médio</option>
+                <option value="1 ANO B Ensino Médio">1 ANO B Ensino Médio</option>
+                <option value="1 ANO C Ensino Médio">1 ANO C Ensino Médio</option>
+                <option value="1 ANO D Ensino Médio">1 ANO D Ensino Médio</option>
+                <option value="2 ANO A Ensino Médio">2 ANO A Ensino Médio</option>
+                <option value="2 ANO B Ensino Médio">2 ANO B Ensino Médio</option>
+                <option value="2 ANO C Ensino Médio">2 ANO C Ensino Médio</option>
+                <option value="2 ANO D Ensino Médio">2 ANO D Ensino Médio</option>
+                <option value="3 ANO A Ensino Médio">3 ANO A Ensino Médio</option>
+                <option value="3 ANO B Ensino Médio">3 ANO B Ensino Médio</option>
+                <option value="3 ANO C Ensino Médio">3 ANO C Ensino Médio</option>
+                <option value="3 ANO D Ensino Médio">3 ANO D Ensino Médio</option>
+            </optgroup>
         </select>
     </div>
     <div>
@@ -869,8 +968,6 @@
 <option value="Física">Física</option>
 <option value="Química">Química</option>
 <option value="Biologia">Biologia</option>
-<option value="Formação Profissional">Formação Profissional</option>
-<option value="Inovaê">Inovaê</option>
 <option value="Sociologia">Sociologia</option>
 </select>
 </div>
@@ -1173,50 +1270,75 @@
     // Initial data (will be replaced by localStorage if data exists)
      let students = [];
      let users = [{ username: 'administrador', password: 'admsenac2024', role: 'admin', name: 'Administrador', assignments: [] }]; // Default admin user
-    const newStudentsList1A = ["Alice Souza Cavalcanti", "Ana Luisa Trajano Fragoso", "Anna Jullia Cabral da Silva", "Davi Fenelon Mendonça da Silva", "Fernando Vinicius Serejo de Melo", "Gabriel Artur Lima da Silva", "Gabriel de Souza Alencar", "Gabriel Vinicius Nazareth de Melo", "Gabrielly Maria da Silva Oliveira", "Giovanna Dias Sales do Nascimento", "Guilherme Barbosa Alcântara", "Guilherme Viana Guedes Nunes", "Heloisa Maria do Carmo Santos", "Henrique Rodrigues Ulisses", "Hivison Yan Pereira de Oliveira", "Ikaro Vinícius Gomes de Abreu", "Isabel Cristina Vital da Silva Nascimento", "Julia Carlos Picchetto", "Leonardo Vasconcelos Santana", "Leticia Xavier da Silva", "Marcos Cavalcanti de Freitas Lima", "Maria Laura Alves da Silva", "Mária Luiza Gomes Felix", "Matheus Josias de França Caitano", "Miguel Bispo de Almeida", "Miguel Rodrigues Souza de Lima", "Milena Maria Andrade de Lima", "Nicolas Gabriel de Oliveira Muniz", "Otávio Xavier de Amorim Fontes", "Pedro Luiz Barbosa Generoso", "Rayner Victor Silva de Rezende Filho", "Richard Lima Nascimento de Melo", "Yasmin de França Medeiros"];
-    const newStudentsList1B = ['Álvaro Martins Moraes', 'Anderson Marcelino dos Santos', 'Anna Luiza Vicente de Castro Lira', 'Arthur Brunno dos Santos Silva', 'Arthur Guilherme de Andrade Barros', 'Caylane Maria Rodrigues de Souza', 'Clara Beatriz Viana Souza Pinto', 'Davi Cruz Correia Lima', 'Eduardo Bezerra Souto Maior Mendes', 'Ellen Vitória Pessoa da Silva', 'Gabriel Araújo de França', 'Guilherme Vinhaes de Matos', 'Isabelle Miranda Moreira', 'Israel Ricardo de Araujo Lõbo', 'Izadhora Luíza Dias Pródigo', 'Jorge Henrique da Silva', 'Julia Isabella Bezerra de Fraga', 'Júlia Letícia do Nascimento da Silva', 'Karen Lorena da Cunha Souza', 'Lucas da Silva Resende', 'Marcelo José Bomfim Neto', 'Marcos Yuri Gadelha Araújo', 'Maria Clara Bezerra Reis', 'Maria Eduarda Araújo Nascimento', 'Maria Eduarda Rodrigues Barreto', 'Maria Letícia Góes Azevedo', 'Marina Gabriele de Andrade Rego', 'Matheus Dias Correia de Assunção', 'Murilo de Lima Rodrigues', 'Pedro Gabriel Farias de Arruda Guedes', 'Ruan Zaquel Sena da Silva', 'Samara Maciel Cabral de Melo'];
-    const newStudentsList1C = ['Alice Giulianna dos Santos Alves', 'Arthur Brito Solano Guerra de Oliveira', 'Caua Leonardo Santos Ferreira de Sena', 'Cláudio Gusmão Ramos Neto', 'David Romão Gomes dos Passos', 'Emily Larissa Pereira da Silva', 'Estefany Guedes Carvalho', 'Evilin Nayara Gomes da Silva', 'Harison Cleyton Fernandes do Nascimento', 'Heitor Assunção Monteiro', 'Izaias Elias Chagas Neto', 'Jefferson Luan Silva de Paula', 'João Daniel Bernardo de Santana Oliveira', 'João Pedro da SilvaEm Processo', 'Jullia Hadassa Araujo de Oliveira', 'Kaike Eduardo Morozini de Bastos', 'Kauã Felipe Oliveira da Silva', 'Larissa Lopes Belo da Silva', 'Livia Ferreira Nunes', 'Luís Guilherme Ventura Alves', 'Maria Clara da Silva Clemente', 'Maria Eduarda de Brito Rodrigues', 'Maria Eduarda Farias Chaves Lopes', 'Maria Fernanda Oliveira Costa', 'Maria Klara Alves Cavalcante', 'Maria Luiza Braz Mendes', 'Mateus Marinho Espíndola', 'Nicolas Gabriel Bezerra dos Santos Souza', 'Rianne de Almeida Romao', 'Samuell Moises Pereira da Silva', 'Thays Camila da Silva Santos', 'Vinicios Bezerra da Silva', 'Wandersson Alves Cavalcante', 'William Alves de Freitas'];
-    const newStudentsList2A = ['Cibele Guerra Medeiros', 'Davi Nascimento Martins', 'Deborah Leão Marques Machado', 'Erick Cauã Ferreira Rodrigues Figueredo', 'Gabriel Elias Rangel', 'Gleiciane Júlia Vieira do Nascimento', 'Ivan Freire de Araújo Neto', 'Joao Henrique Oliveira Gonçalves', 'Joao Vitor Sousa Ramos', 'Juan Gomes Rodrigues', 'Leticia de Santana Lins', 'Letícia Maria Augusto de Souza Galvão', 'Luckas Alexandre Oliveira Castro Barros', 'Luna Ariela Carvalho de Deus', 'Matheus de Andrade Cordeiro Malafaia Gomes', 'Matheus Henrique Ferreira da Silva', 'Maxwell Bernardo Eulálio Pereira Cavalcante', 'Pedro Vinicius de Souza Cavalcanti', 'Pietro Cauê da Silva Santos', 'Renato Alves Ribeiro de Oliveira', 'Suzanny Moura de Barros', 'Talles Renan Melo de Souza Lira', 'Thayná Valença Albuquerque', 'Victor Gabriel Pereira de Lima', 'Vinicius Novaes Silva'];
-    const newStudentsList2B = ['Adricia Naine Costa Bandeira Ferreira', 'Airton Samuel Rodrigues Costa', 'Bruno Rafael Silva Costa', 'Caio Cesar Silva Melo', 'Caio Muller Silva da Rocha', 'Daniel Henrique José dos Santos', 'Davi Felix MarinhoEm', 'Diógenes Luiz Freitas Batista', 'Eduardo Passos de Andrade', 'Gabriela Lima Alexandrino', 'Geovana Noemi Ferreira Moura', 'Guilherme José Rodrigues de Freitas', 'Ingrid Cristina Rodrigues Ventura de Araújo', 'João Henrique Santana Cunha', 'Layza Cristina Melo Santos', 'Ligia Vitoria Linhares do Nascimento', 'Lucas Miguel Barbosa da Silva', 'Luiz Henrique dos Santos', 'Marcos Vasconcelos Dencker Beltrão', 'Maria Carolina Franco de Lima Leite', 'Maria Manuela Helena da Silva', 'Maria Manuela Helena da Silva', 'Matheus Vínicius Aguiar da Silva', 'Pedro Henrique Moura Nascimento da Silva', 'Pedro Henrique Ribeiro de Assumpção', 'Pedro Ivo Ribeiro da Cunha', 'Pedro Vinicius Barbosa de Oliveira', 'Sidney Sabino de Lima Junior'];
-    const newStudentsList3A = ['Alliny Santos de Albuquerque', 'Anna Bianca de Moraes Almeida Castro', 'Arthur Emmanuel França Aquino de Medeiros', 'Carlos Eduardo Bezerra de Santana', 'Clarice Araújo Soares Couto', 'Emily Cristiane Mesquita de Almeida', 'Filipe Emanuel Lins do Nascimento Silva', 'Guilherme Tomaz Paiva de Aquino', 'Iury Gabriel Barreto', 'Lara Lins de Oliveira', 'Leandro Henrique Carvalho Correia', 'Leticia Chaprão Aureliano de Souza', 'Leticia Ellen Ximenes', 'Letícia Marques de Lima Campos', 'Lucas Bandeira de Melo Torres Sena', 'Marcello Henrique da Silva Barros', 'Maria Clara Oliveira Sarinho de Melo', 'Maria Eduarda Soares de Albuquerque', 'Maria Livia Costa de Oliveira Silva', 'Marina Rodrigues de Lima', 'Mateus Araujo de Oliveira Santos', 'Samara Marinho Pereira Roberto', 'Victor Antonio Santana de Lima', 'Yasmin Lopes Mendes'];
+
     const classInfoMap = {
-        'Infantil 1': { unit: 'Manhã', course: 'Séries Iniciais' },
-        'Infantil 2': { unit: 'Manhã', course: 'Séries Iniciais' },
-        'Infantil 3': { unit: 'Manhã', course: 'Séries Iniciais' },
-        '1A': { unit: 'Manhã', course: 'Fundamental 1' },
-        '1B': { unit: 'Manhã', course: 'Fundamental 1' },
-        '1C': { unit: 'Manhã', course: 'Fundamental 1' },
-        '2A': { unit: 'Manhã', course: 'Fundamental 1' },
-        '2B': { unit: 'Manhã', course: 'Fundamental 1' },
-        '2C': { unit: 'Manhã', course: 'Fundamental 1' },
-        '3A': { unit: 'Manhã', course: 'Fundamental 1' },
-        '3B': { unit: 'Manhã', course: 'Fundamental 1' },
-        '3C': { unit: 'Manhã', course: 'Fundamental 1' },
-        '4A': { unit: 'Manhã', course: 'Fundamental 1' },
-        '4B': { unit: 'Manhã', course: 'Fundamental 1' },
-        '4C': { unit: 'Manhã', course: 'Fundamental 1' },
-        '5A': { unit: 'Manhã', course: 'Fundamental 1' },
-        '5B': { unit: 'Manhã', course: 'Fundamental 1' },
-        '5C': { unit: 'Manhã', course: 'Fundamental 1' },
-        '6A': { unit: 'Manhã', course: 'Fundamental 2' },
-        '6B': { unit: 'Manhã', course: 'Fundamental 2' },
-        '6C': { unit: 'Manhã', course: 'Fundamental 2' },
-        '7A': { unit: 'Manhã', course: 'Fundamental 2' },
-        '7B': { unit: 'Manhã', course: 'Fundamental 2' },
-        '7C': { unit: 'Manhã', course: 'Fundamental 2' },
-        '8A': { unit: 'Manhã', course: 'Fundamental 2' },
-        '8B': { unit: 'Manhã', course: 'Fundamental 2' },
-        '8C': { unit: 'Manhã', course: 'Fundamental 2' },
-        '9A': { unit: 'Manhã', course: 'Fundamental 3' }, // NEW CLASS
-        '9B': { unit: 'Manhã', course: 'Fundamental 3' }, // NEW CLASS
-        '9C': { unit: 'Manhã', course: 'Fundamental 3' }, // NEW CLASS
-        // Existing classes (Médio Técnico)
-        '1A_MT': { unit: 'Manhã', course: 'Médio Técnico Desenvolvimento de Sistemas' },
-        '1B_MT': { unit: 'Manhã', course: 'Médio Técnico Desenvolvimento de Jogos' },
-        '1C_MT': { unit: 'Tarde', course: 'Médio Técnico Desenvolvimento de Sistemas' },
-        '2A_MT': { unit: 'Manhã', course: 'Médio Técnico Desenvolvimento de Sistemas' },
-        '2B_MT': { unit: 'Manhã', course: 'Médio Técnico Desenvolvimento de Sistemas' },
-        '3A_MT': { unit: 'Tarde', course: 'Médio Técnico Informática' }
+        // Educação Infantil
+        'ED. Infantil 1 Turma A': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 1 Turma B': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 1 Turma C': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 1 Turma D': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 2 Turma A': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 2 Turma B': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 2 Turma C': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 2 Turma D': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 3 Turma A': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 3 Turma B': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 3 Turma C': { unit: 'Manhã', course: 'Educação Infantil' },
+        'ED. Infantil 3 Turma D': { unit: 'Manhã', course: 'Educação Infantil' },
+
+        // Fundamental 1
+        '1 ANO A Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '1 ANO B Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '1 ANO C Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '1 ANO D Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '2 ANO A Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '2 ANO B Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '2 ANO C Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '2 ANO D Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '3 ANO A Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '3 ANO B Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '3 ANO C Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '3 ANO D Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '4 ANO A Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '4 ANO B Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '4 ANO C Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '4 ANO D Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '5 ANO A Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '5 ANO B Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '5 ANO C Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+        '5 ANO D Fundamental 1': { unit: 'Manhã', course: 'Fundamental 1' },
+
+        // Fundamental 2
+        '6 ANO A Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '6 ANO B Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '6 ANO C Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '6 ANO D Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '7 ANO A Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '7 ANO B Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '7 ANO C Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '7 ANO D Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '8 ANO A Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '8 ANO B Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '8 ANO C Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '8 ANO D Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '9 ANO A Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '9 ANO B Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '9 ANO C Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+        '9 ANO D Fundamental 2': { unit: 'Manhã', course: 'Fundamental 2' },
+
+        // Ensino Médio
+        '1 ANO A Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '1 ANO B Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '1 ANO C Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '1 ANO D Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '2 ANO A Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '2 ANO B Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '2 ANO C Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '2 ANO D Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '3 ANO A Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '3 ANO B Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '3 ANO C Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
+        '3 ANO D Ensino Médio': { unit: 'Manhã', course: 'Ensino Médio' },
     };
 
     function getClassInfo(className) { return classInfoMap[className] || { unit: 'Desconhecido', course: 'Desconhecido' }; }
@@ -1271,7 +1393,7 @@
             } else {
                  // Add initial professor and coordinator data if no user data in localStorage
                  users = [{ username: 'administrador', password: 'admsenac2024', role: 'admin', name: 'Administrador', assignments: [] }];
-                 users.push({ username: 'profmath', password: 'passprof', role: 'professor', name: 'Prof. Matemática', assignments: [{ discipline: 'Matemática', classes: ['1A', '1B', '1C', '2A', '2B', '3A'] }, { discipline: 'Física', classes: ['2A', '2B'] }] });
+                 users.push({ username: 'profmath', password: 'passprof', role: 'professor', name: 'Prof. Matemática', assignments: [{ discipline: 'Matemática', classes: ['1 ANO A Fundamental 1', '1 ANO B Fundamental 1', '1 ANO C Fundamental 1', '2 ANO A Fundamental 1', '2 ANO B Fundamental 1', '3 ANO A Fundamental 1'] }, { discipline: 'Física', classes: ['2 ANO A Fundamental 1', '2 ANO B Fundamental 1'] }] });
                  users.push({ username: 'coord', password: 'passcoord', role: 'coordenador', name: 'Coordenador Geral', assignments: [] });
                   // console.log('No user data found in localStorage, using initial data.');
             }
@@ -1282,7 +1404,7 @@
             students = [];
             users = [{ username: 'administrador', password: 'admsenac2024', role: 'admin', name: 'Administrador', assignments: [] }];
              populateInitialStudents();
-             users.push({ username: 'profmath', password: 'passprof', role: 'professor', name: 'Prof. Matemática', assignments: [{ discipline: 'Matemática', classes: ['1A', '1B', '1C', '2A', '2B', '3A'] }, { discipline: 'Física', classes: ['2A', '2B'] }] });
+             users.push({ username: 'profmath', password: 'passprof', role: 'professor', name: 'Prof. Matemática', assignments: [{ discipline: 'Matemática', classes: ['1 ANO A Fundamental 1', '1 ANO B Fundamental 1', '1 ANO C Fundamental 1', '2 ANO A Fundamental 1', '2 ANO B Fundamental 1', '3 ANO A Fundamental 1'] }, { discipline: 'Física', classes: ['2 ANO A Fundamental 1', '2 ANO B Fundamental 1'] }] });
              users.push({ username: 'coord', password: 'passcoord', role: 'coordenador', name: 'Coordenador Geral', assignments: [] });
         }
     }
@@ -1390,7 +1512,7 @@
                 document.getElementById('studentNotesContent').innerHTML = '<p class="no-notes">Nenhuma anotação disponível.</p>'; // NEW: Clear student notes
             }
         } else {
-            document.getElementById('studentBulletinContent').innerHTML = '<p style="text-align: center; font-style: italic;">Você precisa estar logado como aluno para ver seu boletim.</p>';
+            bulletinContentDiv.innerHTML = '<p style="text-align: center; font-style: italic;">Você precisa estar logado como aluno para ver seu boletim.</p>';
              if(studentPrintOptions) studentPrintOptions.classList.add('hidden');
              document.getElementById('studentNotesContent').innerHTML = '<p class="no-notes">Nenhuma anotação disponível.</p>'; // NEW: Clear student notes
         }
@@ -1645,7 +1767,7 @@
                     cell.dataset.options = ',"Aprovado","Recuperacao","Reprovado"';
                 } else if (field === 'situation') {
                     cell.dataset.type = 'select';
-                    cell.dataset.options = ',"Aprovado","Recuperado","Reprovado","Pendente"'; // Added Recuperado as option
+                    cell.dataset.options = ',"Aprovado","Recuperado","Recuperado","Pendente"'; // Added Recuperado as option
                 } else if (field === 'media') { // Media field should be display-only
                     cell.classList.remove('editable-cell'); // Remove editable class for media
                     cell.dataset.type = 'text'; // But still treat as text for display
@@ -2047,7 +2169,7 @@
 
         // Validate if all required fields are filled and numerical inputs are not empty strings
         if (!selectedClass || !studentId || !disciplineName || !unitNumber || test1 === '' || test2 === '' || eval1 === '' || !finalGrade) {
-            alert('Por favor, selecione a Turma, o Aluno e preencha todos os campos da disciplina (Notas de Teste, Avaliação, Menção Final e Unidade).');
+            alert('Por favor, preencha a Turma, o Aluno e preencha todos os campos da disciplina (Notas de Teste, Avaliação, Menção Final e Unidade).');
             return;
         }
         // Parse numerical values after validation
@@ -2138,8 +2260,33 @@
 
     function populateClassSelect(selectElement) {
         selectElement.innerHTML = '<option value="">Selecione a Turma</option>';
-        const uniqueClasses = [...new Set(Object.keys(classInfoMap))].sort(); // Use keys from classInfoMap
-        uniqueClasses.forEach(className => { const option = document.createElement('option'); option.value = className; option.textContent = className; selectElement.appendChild(option); });
+        const optgroups = {
+            'Educação Infantil': [],
+            'Fundamental 1': [],
+            'Fundamental 2': [],
+            'Ensino Médio': []
+        };
+
+        for (const className in classInfoMap) {
+            const category = classInfoMap[className].course;
+            if (optgroups[category]) {
+                optgroups[category].push(className);
+            }
+        }
+
+        for (const category in optgroups) {
+            if (optgroups[category].length > 0) {
+                const optgroup = document.createElement('optgroup');
+                optgroup.label = category;
+                optgroups[category].sort().forEach(className => {
+                    const option = document.createElement('option');
+                    option.value = className;
+                    option.textContent = className;
+                    optgroup.appendChild(option);
+                });
+                selectElement.appendChild(optgroup);
+            }
+        }
     }
 
     function printAllReports() {
@@ -2633,17 +2780,27 @@
     });
 
     const allClasses = [
-        "Infantil 1", "Infantil 2", "Infantil 3",
-        "1A", "1B", "1C", "2A", "2B", "2C", "3A", "3B", "3C", "4A", "4B", "4C", "5A", "5B", "5C",
-        "6A", "6B", "6C", "7A", "7B", "7C", "8A", "8B", "8C",
-        "9A", "9B", "9C", // NEW CLASSES
-        "1A_MT", "1B_MT", "1C_MT", "2A_MT", "2B_MT", "3A_MT" // Existing Médio Técnico classes
+        "ED. Infantil 1 Turma A", "ED. Infantil 1 Turma B", "ED. Infantil 1 Turma C", "ED. Infantil 1 Turma D",
+        "ED. Infantil 2 Turma A", "ED. Infantil 2 Turma B", "ED. Infantil 2 Turma C", "ED. Infantil 2 Turma D",
+        "ED. Infantil 3 Turma A", "ED. Infantil 3 Turma B", "ED. Infantil 3 Turma C", "ED. Infantil 3 Turma D",
+        "1 ANO A Fundamental 1", "1 ANO B Fundamental 1", "1 ANO C Fundamental 1", "1 ANO D Fundamental 1",
+        "2 ANO A Fundamental 1", "2 ANO B Fundamental 1", "2 ANO C Fundamental 1", "2 ANO D Fundamental 1",
+        "3 ANO A Fundamental 1", "3 ANO B Fundamental 1", "3 ANO C Fundamental 1", "3 ANO D Fundamental 1",
+        "4 ANO A Fundamental 1", "4 ANO B Fundamental 1", "4 ANO C Fundamental 1", "4 ANO D Fundamental 1",
+        "5 ANO A Fundamental 1", "5 ANO B Fundamental 1", "5 ANO C Fundamental 1", "5 ANO D Fundamental 1",
+        "6 ANO A Fundamental 2", "6 ANO B Fundamental 2", "6 ANO C Fundamental 2", "6 ANO D Fundamental 2",
+        "7 ANO A Fundamental 2", "7 ANO B Fundamental 2", "7 ANO C Fundamental 2", "7 ANO D Fundamental 2",
+        "8 ANO A Fundamental 2", "8 ANO B Fundamental 2", "8 ANO C Fundamental 2", "8 ANO D Fundamental 2",
+        "9 ANO A Fundamental 2", "9 ANO B Fundamental 2", "9 ANO C Fundamental 2", "9 ANO D Fundamental 2",
+        "1 ANO A Ensino Médio", "1 ANO B Ensino Médio", "1 ANO C Ensino Médio", "1 ANO D Ensino Médio",
+        "2 ANO A Ensino Médio", "2 ANO B Ensino Médio", "2 ANO C Ensino Médio", "2 ANO D Ensino Médio",
+        "3 ANO A Ensino Médio", "3 ANO B Ensino Médio", "3 ANO C Ensino Médio", "3 ANO D Ensino Médio"
     ].sort(); // Sort alphabetically for display
 
      const allDisciplines = [
         "Alfabetização", "Português", "Matemática", "Ciências", "História", "Geografia", "Artes", "Educação Física", "Inglês",
         "Redação", "Gramática", "Literatura", "Projeto de Vida", "Filosofia", "Física", "Química", "Biologia",
-        "Formação Profissional", "Inovaê", "Sociologia"
+        "Sociologia" // Removed "Formação Profissional" and "Inovaê"
      ].sort(); // Sort alphabetically for display
 
 
