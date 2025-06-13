@@ -7,7 +7,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
             margin: 0;
-            background-color: #D2B48C; /* Light brown background color (Tan) */
+            background-color: #F5DEB3; /* Light brown background color (Wheat) */
             color: #A52A2A; /* Primary color */
             min-height: 100vh;
             padding-bottom: 40px; /* Add bottom padding for fixed footer */
@@ -30,7 +30,7 @@
             padding-bottom: 5px;
         }
         table {
-            width: 100%;
+            width: 100%; /* Ensure tables take full available width */
             border-collapse: collapse;
             margin-top: 20px;
         }
@@ -178,11 +178,11 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            background-color: #fff; /* White background for app */
+            background-color: #F5DEB3; /* Changed to light brown */
         }
 
         #sidebar {
-            width: 250px; /* Slightly wider sidebar */
+            width: 220px; /* Slightly narrower sidebar for more content space */
             background-color: white; /* Sidebar background color */
             padding: 20px; /* Increased padding */
             display: flex;
@@ -216,7 +216,7 @@
 
         #mainContentArea {
             flex-grow: 1;
-            padding: 30px 15px; /* Adjusted padding: 30px top/bottom, 15px left/right */
+            padding: 30px 5px; /* Reduced horizontal padding for more table width */
             overflow-y: auto;
             height: calc(100vh - 40px); /* Adjust height for footer */
             box-sizing: border-box;
@@ -951,24 +951,6 @@
 <label for="disciplineSelect">Selecione a Disciplina:</label>
 <select id="disciplineSelect">
 <option value="">Selecione a Disciplina</option>
-<option value="Alfabetização">Alfabetização</option>
-<option value="Português">Português</option>
-<option value="Matemática">Matemática</option>
-<option value="Ciências">Ciências</option>
-<option value="História">História</option>
-<option value="Geografia">Geografia</option>
-<option value="Artes">Artes</option>
-<option value="Educação Física">Educação Física</option>
-<option value="Inglês">Inglês</option>
-<option value="Redação">Redação</option>
-<option value="Gramática">Gramática</option>
-<option value="Literatura">Literatura</option>
-<option value="Projeto de Vida">Projeto de Vida</option>
-<option value="Filosofia">Filosofia</option>
-<option value="Física">Física</option>
-<option value="Química">Química</option>
-<option value="Biologia">Biologia</option>
-<option value="Sociologia">Sociologia</option>
 </select>
 </div>
 <div style="margin-top: 10px;">
@@ -985,21 +967,18 @@
 <label for="test1">Teste 1 (0-10):</label>
 <select id="test1">
     <option value="">Nota Teste 1</option>
-    <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
 </select>
 </div>
 <div style="margin-top: 10px;">
 <label for="test2">Teste 2 (0-10):</label>
 <select id="test2">
     <option value="">Nota Teste 2</option>
-    <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
 </select>
 </div>
 <div style="margin-top: 10px;">
 <label for="evaluation1">Avaliação (0-10):</label>
 <select id="evaluation1">
     <option value="">Nota Avaliação</option>
-    <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
 </select>
 </div>
 <div style="margin-top: 10px;">
@@ -1266,6 +1245,26 @@
 </div>
 </div>
 <script>
+    // Generate an array of numbers from 0 to 10 with increments of 0.25
+    const gradeOptions = [];
+    for (let i = 0; i <= 10; i += 0.25) {
+        gradeOptions.push(i.toFixed(2)); // Ensure two decimal places, e.g., "1.00", "1.25"
+    }
+
+    // Function to populate a grade select element
+    function populateGradeSelect(selectId) {
+        const selectElement = document.getElementById(selectId);
+        if (!selectElement) return;
+
+        selectElement.innerHTML = '<option value="">Nota ' + selectId.replace('test', 'Teste ').replace('evaluation1', 'Avaliação') + '</option>';
+        gradeOptions.forEach(grade => {
+            const option = document.createElement('option');
+            option.value = grade;
+            option.textContent = grade.replace('.', ','); // Display with comma
+            selectElement.appendChild(option);
+        });
+    }
+
     // --- DATA SIMULATION IN MEMORY (Replace with Local Storage or Backend) ---
     // Initial data (will be replaced by localStorage if data exists)
      let students = [];
@@ -1452,6 +1451,10 @@
             document.getElementById('addDisciplineSection').classList.remove('hidden');
             populateClassSelect(document.getElementById('disciplineClassSelect'));
             populateStudentSelectForDiscipline();
+            populateDisciplineSelect(document.getElementById('disciplineSelect')); // Populate discipline select
+            populateGradeSelect('test1'); // Populate grade selects
+            populateGradeSelect('test2');
+            populateGradeSelect('evaluation1');
             professorAgendaButton.classList.add('hidden'); // NEW: Hide agenda button for admin/coordinator
         } else {
             document.getElementById('addStudentSection').classList.add('hidden');
@@ -1706,20 +1709,23 @@
                             cell.dataset.options = ',"Aprovado","Recuperacao","Reprovado"';
                         } else if (field === 'situation') {
                              cell.dataset.type = 'select';
-                             cell.dataset.options = ',"Aprovado","Recuperado","Reprovado","Pendente"'; // Added Recuperado as option
+                             cell.dataset.options = ',"Aprovado","Recuperado","Recuperado","Pendente"'; // Added Recuperado as option
                         } else if (field === 'media') { // Media field should be display-only
                             cell.classList.remove('editable-cell'); // Remove editable class for media
                             cell.dataset.type = 'text'; // But still treat as text for display
                         }
                          else { // test1, test2, eval1 are numerical select
                             cell.dataset.type = 'select';
-                            cell.dataset.options = '0,1,2,3,4,5,6,7,8,9,10'; // Numerical options
+                            cell.dataset.options = gradeOptions.join(','); // Use generated grade options
                         }
                         // Display value: if it's media, round to 2 decimal places. Otherwise, use existing logic.
                         let displayValue = discipline[field];
                         if (field === 'media' && displayValue !== undefined && displayValue !== null && displayValue !== '') {
-                            displayValue = parseFloat(displayValue).toFixed(2);
-                        } else if (displayValue === undefined || displayValue === null || displayValue === '') {
+                            displayValue = parseFloat(displayValue).toFixed(2).replace('.', ','); // Display with comma
+                        } else if (['test1', 'test2', 'eval1'].includes(field) && displayValue !== undefined && displayValue !== null && displayValue !== '') {
+                            displayValue = String(displayValue).replace('.', ','); // Display numerical grades with comma
+                        }
+                        else if (displayValue === undefined || displayValue === null || displayValue === '') {
                             displayValue = (field === 'observation' || field === 'finalGrade' || field === 'situation') ? '' : '-';
                         }
                         cell.innerHTML = `<span>${displayValue}</span>`;
@@ -1747,13 +1753,13 @@
             document.querySelector('#professorStudentTable thead').classList.add('hidden'); // Hide header if no students
              return;
         } else {
-             document.getElementById('professorNoStudentsMessage').classList.add('hidden');
+             document.getElementById('professorNoStudentsMessage').classList.remove('hidden');
              document.querySelector('#professorStudentTable thead').classList.remove('hidden'); // Show header if students are rendered
         }
 
         studentsToRender.forEach(student => {
             const disciplineData = student.disciplines.find(d => d.discipline === selectedDiscipline && d.unit == selectedUnit); // Use == for unit comparison due to string/number mix
-            const row = tableBody.insertRow(); // Changed from insertCell() to insertRow()
+            const row = tableBody.insertRow();
             row.insertCell().textContent = student.matricula || '-'; // Display matricula
             row.insertCell().textContent = student.name;
             row.insertCell().textContent = student.course;
@@ -1774,13 +1780,16 @@
                 }
                 else { // test1, test2, eval1 are numerical select
                     cell.dataset.type = 'select';
-                    cell.dataset.options = '0,1,2,3,4,5,6,7,8,9,10'; // Numerical options
+                    cell.dataset.options = gradeOptions.join(','); // Use generated grade options
                 }
                  // Display value: if it's media, round to 2 decimal places. Otherwise, use existing logic.
                 let displayValue = disciplineData ? disciplineData[field] : undefined;
                 if (field === 'media' && displayValue !== undefined && displayValue !== null && displayValue !== '') {
-                    displayValue = parseFloat(displayValue).toFixed(2);
-                } else if (displayValue === undefined || displayValue === null || displayValue === '') {
+                    displayValue = parseFloat(displayValue).toFixed(2).replace('.', ','); // Display with comma
+                } else if (['test1', 'test2', 'eval1'].includes(field) && displayValue !== undefined && displayValue !== null && displayValue !== '') {
+                    displayValue = String(displayValue).replace('.', ','); // Display numerical grades with comma
+                }
+                else if (displayValue === undefined || displayValue === null || displayValue === '') {
                     displayValue = (field === 'observation' || field === 'finalGrade' || field === 'situation') ? '' : '-';
                 }
                 cell.innerHTML = `<span>${displayValue}</span>`;
@@ -1889,15 +1898,16 @@
             options.forEach(optionValue => {
                 const option = document.createElement('option');
                 option.value = optionValue;
-                // For numeric grades, display the number. For mentions/situations, display the full text.
-                if (field === 'finalGrade') {
+                // For numerical grades, display the number with comma. For mentions/situations, display the full text.
+                if (['test1', 'test2', 'eval1'].includes(field)) {
+                    option.textContent = String(optionValue).replace('.', ','); // Display with comma for decimals
+                } else {
                     option.textContent = optionValue;
-                } else if (field === 'situation') {
-                    option.textContent = optionValue;
-                } else { // Numerical grades
-                    option.textContent = optionValue || '-'; // Display empty string as '-'
                 }
-                if (currentValue == optionValue || (currentValue === '-' && optionValue === '')) option.selected = true; // Use == for comparison
+
+                if (currentValue.replace(',', '.') == optionValue || (currentValue === '-' && optionValue === '')) { // Compare after replacing comma with dot for numerical values
+                    option.selected = true;
+                }
                 inputElement.appendChild(option);
             });
         } else if (inputType === 'text') {
@@ -1931,11 +1941,11 @@
                 };
                 student.disciplines.push(disciplineEntry);
             }
-            // Parse numerical values if applicable
+            // Parse numerical values if applicable (replace comma with dot for parseFloat)
             if (['test1', 'test2', 'eval1'].includes(field)) {
-                newValue = newValue === '' ? '' : parseFloat(newValue); // Store empty string for empty input, or float for numbers
+                newValue = newValue === '' ? '' : parseFloat(newValue.replace(',', '.')); // Store empty string for empty input, or float for numbers
                 if (isNaN(newValue) && newValue !== '') { // If not a number and not empty, revert
-                    newValue = inputElement.defaultValue;
+                    newValue = parseFloat(inputElement.defaultValue.replace(',', '.')); // Revert to parsed default
                     alert('Por favor, insira um número válido para a nota.');
                 }
             }
@@ -1950,7 +1960,12 @@
 
             let displayValue = newValue;
 
-            if (displayValue === '' || displayValue === null || displayValue === undefined) {
+            if (field === 'media' && displayValue !== undefined && displayValue !== null && displayValue !== '') {
+                displayValue = parseFloat(displayValue).toFixed(2).replace('.', ',');
+            } else if (['test1', 'test2', 'eval1'].includes(field) && displayValue !== undefined && displayValue !== null && displayValue !== '') {
+                displayValue = String(displayValue).replace('.', ',');
+            }
+            else if (displayValue === '' || displayValue === null || displayValue === undefined) {
                  displayValue = (field === 'observation' || field === 'finalGrade' || field === 'situation') ? '' : '-'; // Display '-' for empty numerical/evaluation, '' for observation
             }
 
@@ -1962,7 +1977,7 @@
             if (currentUser && currentUser.role === 'aluno' && currentUser.studentId === student.id) showStudentBulletin();
 
         } else {
-            console.error('Erro: Aluno não encontrado para edição.'); cell.innerHTML = `<span>${inputElement.defaultValue}</span>`; // Revert if error
+            console.error('Erro: Aluno não encontrado para edição.'); cell.innerHTML = `<span>${inputElement.defaultValue.replace('.', ',')}</span>`; // Revert if error, display with comma
         }
         cell.classList.remove('editing');
     }
@@ -2132,14 +2147,14 @@
     document.getElementById('evaluation1').addEventListener('change', calculateAndDisplayMedia);
 
     function calculateAndDisplayMedia() {
-        const test1 = parseFloat(document.getElementById('test1').value);
-        const test2 = parseFloat(document.getElementById('test2').value);
-        const eval1 = parseFloat(document.getElementById('evaluation1').value);
+        const test1 = parseFloat(document.getElementById('test1').value.replace(',', '.')); // Parse with dot
+        const test2 = parseFloat(document.getElementById('test2').value.replace(',', '.')); // Parse with dot
+        const eval1 = parseFloat(document.getElementById('evaluation1').value.replace(',', '.')); // Parse with dot
 
         // Only calculate if all three scores are valid numbers
         if (!isNaN(test1) && !isNaN(test2) && !isNaN(eval1)) {
             const media = ((test1 + test2 + eval1) / 3).toFixed(2);
-            document.getElementById('mediaDisplay').textContent = media;
+            document.getElementById('mediaDisplay').textContent = media.replace('.', ','); // Display with comma
         } else {
             document.getElementById('mediaDisplay').textContent = '-'; // Display hyphen if any score is invalid
         }
@@ -2172,10 +2187,10 @@
             alert('Por favor, preencha a Turma, o Aluno e preencha todos os campos da disciplina (Notas de Teste, Avaliação, Menção Final e Unidade).');
             return;
         }
-        // Parse numerical values after validation
-        const parsedTest1 = parseFloat(test1);
-        const parsedTest2 = parseFloat(test2);
-        const parsedEval1 = parseFloat(eval1);
+        // Parse numerical values after validation (replace comma with dot)
+        const parsedTest1 = parseFloat(test1.replace(',', '.'));
+        const parsedTest2 = parseFloat(test2.replace(',', '.'));
+        const parsedEval1 = parseFloat(eval1.replace(',', '.'));
 
         const student = students.find(s => s.id === studentId);
         if (student) {
@@ -2206,9 +2221,9 @@
             populateStudentSelectForDiscipline();
             disciplineSelect.value = '';
             unitSelectDiscipline.value = '';
-            test1Select.value = '';
-            test2Select.value = '';
-            evaluation1Select.value = '';
+            test1Select.value = ''; // Reset to empty string
+            test2Select.value = ''; // Reset to empty string
+            evaluation1Select.value = ''; // Reset to empty string
             finalGradeSelect.value = '';
             observationInput.value = '';
             document.getElementById('mediaDisplay').textContent = '-'; // Reset media display
@@ -2287,6 +2302,17 @@
                 selectElement.appendChild(optgroup);
             }
         }
+    }
+
+    // Function to populate the Discipline Select
+    function populateDisciplineSelect(selectElement) {
+        selectElement.innerHTML = '<option value="">Selecione a Disciplina</option>';
+        allDisciplines.forEach(discipline => {
+            const option = document.createElement('option');
+            option.value = discipline;
+            option.textContent = discipline;
+            selectElement.appendChild(option);
+        });
     }
 
     function printAllReports() {
@@ -2374,10 +2400,10 @@
             bulletinHTML += `<tr><td colspan="${colspan}">Nenhuma disciplina ou nota encontrada para as unidades selecionadas.</td></tr>`;
         } else {
             disciplinesToPrint.forEach(discipline => {
-                const test1Display = discipline.test1 !== undefined && discipline.test1 !== null ? discipline.test1 : '-';
-                const test2Display = discipline.test2 !== undefined && discipline.test2 !== null ? discipline.test2 : '-';
-                const eval1Display = discipline.eval1 !== undefined && discipline.eval1 !== null ? discipline.eval1 : '-';
-                const mediaDisplay = discipline.media !== undefined && discipline.media !== null ? parseFloat(discipline.media).toFixed(2) : '-'; // Display media rounded
+                const test1Display = discipline.test1 !== undefined && discipline.test1 !== null ? String(discipline.test1).replace('.', ',') : '-'; // Display with comma
+                const test2Display = discipline.test2 !== undefined && discipline.test2 !== null ? String(discipline.test2).replace('.', ',') : '-'; // Display with comma
+                const eval1Display = discipline.eval1 !== undefined && discipline.eval1 !== null ? String(discipline.eval1).replace('.', ',') : '-'; // Display with comma
+                const mediaDisplay = discipline.media !== undefined && discipline.media !== null ? parseFloat(discipline.media).toFixed(2).replace('.', ',') : '-'; // Display media rounded with comma
 
                 bulletinHTML += `<tr><td>${discipline.discipline}</td><td>${discipline.unit}</td>${reportType === 'full' ? `<td>${test1Display}</td><td>${test2Display}</td><td>${eval1Display}</td><td>${mediaDisplay}</td>` : ''}<td>${discipline.finalGrade || '-'}</td><td>${discipline.situation || '-'}</td><td>${discipline.observation || ''}</td></tr>`;
             });
@@ -2799,8 +2825,7 @@
 
      const allDisciplines = [
         "Alfabetização", "Português", "Matemática", "Ciências", "História", "Geografia", "Artes", "Educação Física", "Inglês",
-        "Redação", "Gramática", "Literatura", "Projeto de Vida", "Filosofia", "Física", "Química", "Biologia",
-        "Sociologia" // Removed "Formação Profissional" and "Inovaê"
+        "Redação", "Gramática", "Literatura", "Filosofia", "Física", "Química", "Biologia", "Sociologia", "ED. Ambiental"
      ].sort(); // Sort alphabetically for display
 
 
